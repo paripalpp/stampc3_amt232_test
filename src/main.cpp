@@ -52,6 +52,7 @@ void setup() {
     // spi setup
     auto buscfg = get_amt23_bus_config(GPIO_NUM_6, GPIO_NUM_7);
     esp_err_t ret = spi_bus_initialize(SPI_HOST, &buscfg, SPI_DMA_DISABLED);
+    gpio_set_pull_mode(GPIO_NUM_6, GPIO_PULLDOWN_ONLY);
     AMT23 encoder[] = {
         AMT23(SPI_HOST, GPIO_NUM_8),
         AMT23(SPI_HOST, GPIO_NUM_10),
@@ -94,9 +95,9 @@ void setup() {
     {
         delay(1);
         if(digitalRead(GPIO_NUM_3) == LOW){
-            target[0] = PI / 2;
+            target[0] = - PI / 2;
             target[1] = PI / 2;
-            target[2] = - PI / 2;
+            target[2] = PI / 2;
             target[3] = - PI / 2;
         }else{
             target[0] = 0;
