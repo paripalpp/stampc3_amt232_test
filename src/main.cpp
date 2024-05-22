@@ -97,8 +97,8 @@ void setup() {
         if(digitalRead(GPIO_NUM_3) == LOW){
             target[0] = - PI / 2;
             target[1] = PI / 2;
-            target[2] = PI / 2;
-            target[3] = - PI / 2;
+            target[2] = - PI / 2;
+            target[3] = PI / 2;
         }else{
             target[0] = 0;
             target[1] = 0;
@@ -109,7 +109,7 @@ void setup() {
         for(size_t i = 0; i < 4; i++){
             encoder[i].get_f(&rotation[i]);
             motor[i] = motor_pid[i].process(rotation[i], target[i]);
-            motor[i] = (motor[i] > 0.6) ? 0.6 : (motor[i] < -0.6) ? -0.6 : motor[i];
+            motor[i] = (motor[i] > 0.4) ? 0.4 : (motor[i] < -0.4) ? -0.4 : motor[i];
 
             motor_int[i] = motor[i] * INT16_MAX;
         }
